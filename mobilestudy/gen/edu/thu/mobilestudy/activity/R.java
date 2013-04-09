@@ -59,13 +59,18 @@ public final class R {
         public static final int progressbar_10=0x7f020011;
         public static final int progressbar_100=0x7f020012;
         public static final int progressbar_20=0x7f020013;
-        public static final int progressbar_50=0x7f020014;
-        public static final int progressbar_80=0x7f020015;
-        public static final int title_back_focused=0x7f020016;
-        public static final int title_back_normal=0x7f020017;
-        public static final int title_back_pressed=0x7f020018;
-        public static final int title_bar=0x7f020019;
-        public static final int welcome=0x7f02001a;
+        public static final int progressbar_30=0x7f020014;
+        public static final int progressbar_40=0x7f020015;
+        public static final int progressbar_50=0x7f020016;
+        public static final int progressbar_60=0x7f020017;
+        public static final int progressbar_70=0x7f020018;
+        public static final int progressbar_80=0x7f020019;
+        public static final int progressbar_90=0x7f02001a;
+        public static final int title_back_focused=0x7f02001b;
+        public static final int title_back_normal=0x7f02001c;
+        public static final int title_back_pressed=0x7f02001d;
+        public static final int title_bar=0x7f02001e;
+        public static final int welcome=0x7f02001f;
     }
     public static final class id {
         public static final int btn_login_login=0x7f090005;

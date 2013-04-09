@@ -24,6 +24,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="180dp"
-        android:background="@anim/iv_loading" />
+        android:background="@anim/iv_loading"
+        android:scaleType="center" />
 
 </RelativeLayout>

@@ -31,7 +31,12 @@ public class WelcomeActivity extends Activity {
 		// pb_welcome = (ProgressBar) findViewById(R.id.pb_welcome);
 		iv_welcome_loading = (ImageView) findViewById(R.id.iv_welcome_loading);
 		iv_welcome_loading.setBackgroundResource(R.anim.iv_loading);
-		new WelcomeTask().execute();
+		
+		//for test
+		AnimationDrawable animationDrawable = (AnimationDrawable) iv_welcome_loading.getBackground();
+		animationDrawable.start();
+		
+//		new WelcomeTask().execute();
 	}
 
 	// welcome task
