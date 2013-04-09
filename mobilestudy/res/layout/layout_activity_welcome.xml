@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/welcome" >
+
+    <!-- 进度条实现，不行 -->
+    <!--
+    <ProgressBar
+        android:id="@+id/pb_welcome"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="249dp"
+        android:layout_height="121dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="140dp"
+        android:max="100"
+        android:progressDrawable="@drawable/pb_welcome_loading" />
+    -->
+
+    <ImageView
+        android:id="@+id/iv_welcome_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="180dp"
+        android:background="@anim/iv_loading" />
+
+</RelativeLayout>
