@@ -2,11 +2,10 @@ package edu.thu.mobilestudy.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.widget.ImageView;
+import android.os.Handler;
 import edu.thu.mobilestudy.model.User;
 import edu.thu.mobilestudy.util.CommonUtil;
 import edu.thu.mobilestudy.util.LoginUtil;
@@ -21,22 +20,26 @@ import edu.thu.mobilestudy.util.ToastUtil;
  */
 public class WelcomeActivity extends Activity {
 
-	// private ProgressBar pb_welcome;
-	private ImageView iv_welcome_loading;
+//	private ImageView iv_welcome_loading;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_activity_welcome);
-		// pb_welcome = (ProgressBar) findViewById(R.id.pb_welcome);
-		iv_welcome_loading = (ImageView) findViewById(R.id.iv_welcome_loading);
-		iv_welcome_loading.setBackgroundResource(R.anim.iv_loading);
+//		iv_welcome_loading = (ImageView) findViewById(R.id.iv_welcome_loading);
+
+		// for test
+//		AnimationDrawable animationDrawable = (AnimationDrawable) iv_welcome_loading.getBackground();
+//		animationDrawable.start();
 		
-		//for test
-		AnimationDrawable animationDrawable = (AnimationDrawable) iv_welcome_loading.getBackground();
-		animationDrawable.start();
-		
-//		new WelcomeTask().execute();
+		new Handler().postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				new WelcomeTask().execute();
+			}
+		}, 2000);//wait 2 seconds
+
+		 
 	}
 
 	// welcome task
@@ -49,18 +52,18 @@ public class WelcomeActivity extends Activity {
 
 		@Override
 		protected void onPreExecute() {
-			AnimationDrawable animationDrawable = (AnimationDrawable) iv_welcome_loading.getBackground();
-			animationDrawable.start();
+//			AnimationDrawable animationDrawable = (AnimationDrawable) iv_welcome_loading.getBackground();
+//			animationDrawable.start();
 			super.onPreExecute();
 		}
 
 		@Override
 		protected Integer doInBackground(Void... params) {
-			// check network,sd card,user info...
+			// check network,sd card,user info,may take some time...
 			if (NetworkUtil.getNetworkState(getApplicationContext()) == NetworkUtil.NETWORK_STATE_NONE) {
 				return RESULT_NONETWORK;
 			}
-			if (Environment.getExternalStorageState() != Environment.MEDIA_MOUNTED) {
+			if (Environment.getExternalStorageState() == Environment.MEDIA_UNMOUNTED) {
 				return RESULT_NOSDCARD;
 			}
 			user = LoginUtil.readUserInfo();
@@ -81,7 +84,7 @@ public class WelcomeActivity extends Activity {
 			if (result.intValue() == RESULT_NONETWORK) {
 				System.out.println("no network");
 				ToastUtil.showShortToast(getApplicationContext(), "no network!");
-				gotoHomeCache();//here still have a lot to do
+				gotoHomeCache();// here still have a lot to do
 			}
 
 			if (user != null && user.getLoginMode() == LoginUtil.AUTO_LOGIN) {
@@ -100,7 +103,7 @@ public class WelcomeActivity extends Activity {
 
 		// go to Home Cache page
 		private void gotoHomeCache() {
-
+			//current nothing to do
 		}
 
 		// app exit

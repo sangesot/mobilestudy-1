@@ -30,13 +30,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Document;
 
 import edu.thu.mobilestudy.model.MLException;
 
@@ -48,7 +45,7 @@ import edu.thu.mobilestudy.model.MLException;
  */
 public class MLResponse {
 
-	// 这个是用来生成XML Document Builder的单线程，保证每次取的时候都是不同的
+	// hjw 这个是用来生成XML Document Builder的单线程，保证每次取的时候都是不同的
 	// private static ThreadLocal<DocumentBuilder> builders = new ThreadLocal<DocumentBuilder>() {
 	// @Override
 	// protected DocumentBuilder initialValue() {
@@ -61,15 +58,17 @@ public class MLResponse {
 	// };
 
 	private int statusCode;// 状态码
-	// private Document responseAsDocument = null;// 对应的XML
 	private String responseAsString = null;// 返回的String
 	private InputStream is;// response对应的输入流
-	// private HttpURLConnection con;// http 连接
 	private boolean streamConsumed = false;// 流已经consume了，意思就是流已经部分或者全部被读取了
+
+	// private HttpURLConnection con;// http 连接
+	// private Document responseAsDocument = null;// 对应的XML
 
 	public MLResponse() {
 	}
 
+	// hjw
 	// public MLResponse(HttpURLConnection con) throws IOException {
 	// this.con = con;
 	// this.statusCode = con.getResponseCode();
@@ -85,9 +84,7 @@ public class MLResponse {
 	/**
 	 * Returns the response stream.<br>
 	 * This method cannot be called after calling asString() or asDcoument()<br>
-	 * It is suggested to call disconnect() after consuming the stream.
-	 * 
-	 * Disconnects the internal HttpURLConnection silently.
+	 * It is suggested to call disconnect() after consuming the stream. Disconnects the internal HttpURLConnection silently.
 	 */
 	public InputStream asStream() {
 		if (streamConsumed) {
@@ -99,7 +96,6 @@ public class MLResponse {
 	/**
 	 * Returns the response body as string.<br>
 	 * Disconnects the internal HttpURLConnection silently.
-	 * 
 	 */
 	public String asString() /* throws MLException */{
 		if (null == responseAsString) {
@@ -131,11 +127,11 @@ public class MLResponse {
 		return responseAsString;
 	}
 
-	/**
-	 * Returns the response body as org.w3c.dom.Document.<br>
-	 * Disconnects the internal HttpURLConnection silently.
-	 * 
-	 */
+	// hjw
+	// /**
+	// * Returns the response body as org.w3c.dom.Document.<br>
+	// * Disconnects the internal HttpURLConnection silently.
+	// */
 	// public Document asDocument() throws MLException {
 	// if (null == responseAsDocument) {
 	// try {
@@ -183,26 +179,6 @@ public class MLResponse {
 		}
 	}
 
-	// public void disconnect() {
-	// con.disconnect();
-	// }
-
-	// @Override
-	// public String toString() {
-	// if (null != responseAsString) {
-	// return responseAsString;
-	// }
-	// return "Response{" + "statusCode=" + statusCode + ", response=" + responseAsDocument + ", responseString='" + responseAsString
-	// + '\'' + ", is=" + is + ", con=" + con + '}';
-	// }
-	//
-	// public String getResponseHeader(String name) {
-	// if (con != null)
-	// return con.getHeaderField(name);
-	// else
-	// return null;
-	// }
-
 	public String getResponseAsString() {
 		return responseAsString;
 	}
@@ -210,17 +186,6 @@ public class MLResponse {
 	public void setResponseAsString(String responseAsString) {
 		this.responseAsString = responseAsString;
 	}
-
-	// encode responseString with UTF-8 //hjw
-	// private void encodeResponseString(String responseString) {
-	// try {
-	// System.out.println(responseString);
-	// this.responseAsString = new String(responseString.getBytes(), "UTF-8");
-	// System.out.println(responseAsString);
-	// } catch (UnsupportedEncodingException e) {
-	// e.printStackTrace();
-	// }
-	// }
 
 	public void setStatusCode(int statusCode) {
 		this.statusCode = statusCode;
@@ -237,6 +202,36 @@ public class MLResponse {
 	public void setIs(InputStream is) {
 		this.is = is;
 	}
+
+	// hjw
+	// public void disconnect() {
+	// con.disconnect();
+	// }
+	// @Override
+	// public String toString() {
+	// if (null != responseAsString) {
+	// return responseAsString;
+	// }
+	// return "Response{" + "statusCode=" + statusCode + ", response=" + responseAsDocument + ", responseString='" + responseAsString
+	// + '\'' + ", is=" + is + ", con=" + con + '}';
+	// }
+	// public String getResponseHeader(String name) {
+	// if (con != null)
+	// return con.getHeaderField(name);
+	// else
+	// return null;
+	// }
+
+	// encode responseString with UTF-8 //hjw
+	// private void encodeResponseString(String responseString) {
+	// try {
+	// System.out.println(responseString);
+	// this.responseAsString = new String(responseString.getBytes(), "UTF-8");
+	// System.out.println(responseAsString);
+	// } catch (UnsupportedEncodingException e) {
+	// e.printStackTrace();
+	// }
+	// }
 
 	// hjw do not use it
 	// private static Pattern escaped = Pattern.compile("&#([0-9]{3,5});");

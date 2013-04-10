@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Properties;
 
 import android.os.Environment;
-
 import edu.thu.mobilestudy.model.User;
 
 /**

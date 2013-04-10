@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?> 
 <resources> 
-    <color name="text_default">#711098</color>
+    <color name="app_default">#711098</color>
+    <color name="text_default">#ffffff</color>
+    
+    
 </resources> 

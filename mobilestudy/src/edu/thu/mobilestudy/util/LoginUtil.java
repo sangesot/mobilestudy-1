@@ -34,7 +34,7 @@ public class LoginUtil {
 			oos.writeObject(user);
 			oos.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();//
 		}
 	}
 
@@ -52,7 +52,8 @@ public class LoginUtil {
 			user = (User) ois.readObject();
 			ois.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			return null;
 		}
 		return user;
 	}
