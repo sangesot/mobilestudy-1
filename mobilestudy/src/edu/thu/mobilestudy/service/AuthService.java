@@ -15,9 +15,11 @@ import edu.thu.mobilestudy.util.CommonUtil;
 public class AuthService extends MobileLearning {
 
 	// do login action,and catch exception,for here knows what to response to the user
-	public JSONResult login(String url, MLParameter[] mlParameters) {
+	// url is certain,so not pass here,do it here! parameters should be passed here
+	public JSONResult login(MLParameter[] mlParameters) {
 		try {
-			return new JSONResult(httpClient.httpGet(url, mlParameters).asJSONObject());
+			return new JSONResult(httpClient.httpGet(CommonUtil.getValue("baseUrl") + CommonUtil.getValue("service_auth"), mlParameters)
+					.asJSONObject());
 		} catch (MLException e) {
 			e.printStackTrace();
 			return new JSONResult(CommonUtil.RESULT_CODE_EXCEPTION, e.getMessage(), null);

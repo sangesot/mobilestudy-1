@@ -3,53 +3,53 @@
     android:layout_height="fill_parent"
     android:background="@color/app_default" >
 
-    <RelativeLayout
-        android:id="@+id/rl_login_top"
-        android:layout_width="fill_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/toolbar_bg" >
+        android:layout_centerInParent="true"
+        android:text="Search" />
 
+    <!-- not use -->
+    <!--
         <Button
             android:id="@+id/btn_comment_back"
-            android:layout_width="67dp"
+            android:layout_width="@dimen/btn_titlebar_size"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:background="@drawable/btn_title_back"
-            android:onClick="backToMainWeiboHome"
             android:text="返回"
-            android:textColor="#fff"
-            android:textSize="15sp" />
+            android:textColor="@color/text_default"
+            android:textSize="@dimen/text_titlebar_size" />
+    -->
 
+
+    <!--
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="资源"
             android:textColor="@color/text_default"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
+    -->
 
-        <Button
+
+    <!-- not use -->
+    <!--
+             <Button
             android:id="@+id/btn_comment_send"
-            android:layout_width="67dp"
+            android:layout_width="@dimen/btn_titlebar_size"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
             android:background="@drawable/btn_title_function"
-            android:onClick="sendWeiboComment"
             android:text="发表"
-            android:textColor="#fff"
-            android:textSize="15dp" />
-    </RelativeLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Search" />
+            android:textColor="@color/text_default"
+            android:textSize="@dimen/text_titlebar_size" />
+    -->
 
 </RelativeLayout>

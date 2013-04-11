@@ -20,7 +20,7 @@ public class User implements Serializable {
 	private String userId;
 	private String userName;
 	private String password;
-	private int loginMode;//登录方式
+	private int loginMode;// 登录方式
 
 	public User(String userId, String userName) {
 		this(userId, userName, "", LoginUtil.NOT_LOGIN);
@@ -52,6 +52,11 @@ public class User implements Serializable {
 				throw new MLException(jsone.getMessage() + ":" + json.toString(), jsone);
 			}
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "userId=" + userId + " userName=" + userName + " password=" + password + " loginMode=" + loginMode;
 	}
 
 	public String getUserId() {

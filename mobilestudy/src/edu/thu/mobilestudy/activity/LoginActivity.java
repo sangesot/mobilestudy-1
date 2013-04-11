@@ -76,7 +76,7 @@ public class LoginActivity extends Activity {
 			MLParameter[] mlParameters = new MLParameter[] { new MLParameter("action", CommonUtil.getValue("action_login")),
 					new MLParameter("repository", CommonUtil.getValue("repository_des")), new MLParameter("userId", params[0][0]),
 					new MLParameter("password", params[0][1]) };
-			return new AuthService().login(CommonUtil.getValue("baseUrl") + CommonUtil.getValue("service_auth"), mlParameters);
+			return new AuthService().login(mlParameters);
 			// direct request,just for test
 
 			// HttpClient httpClient = new HttpClient();

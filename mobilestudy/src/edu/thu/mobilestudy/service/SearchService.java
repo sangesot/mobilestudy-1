@@ -4,6 +4,7 @@ import edu.thu.mobilestudy.http.MLParameter;
 import edu.thu.mobilestudy.model.JSONResult;
 import edu.thu.mobilestudy.model.MLException;
 import edu.thu.mobilestudy.model.MobileLearning;
+import edu.thu.mobilestudy.util.CommonUtil;
 
 /**
  * 搜索服务接口
@@ -13,9 +14,10 @@ import edu.thu.mobilestudy.model.MobileLearning;
  */
 public class SearchService extends MobileLearning {
 
-	public JSONResult search(String url, MLParameter[] mlParameters) {
+	public JSONResult search(MLParameter[] mlParameters) {
 		try {
-			return new JSONResult(httpClient.httpGet(url, mlParameters).asJSONObject());
+			return new JSONResult(httpClient.httpGet(CommonUtil.getValue("baseUrl") + CommonUtil.getValue("service_search"), mlParameters)
+					.asJSONObject());
 		} catch (MLException e) {
 			e.printStackTrace();
 		}

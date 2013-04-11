@@ -13,6 +13,6 @@
     
     <dimen name="btn_titlebar_size">70dp</dimen>
     
-	<dimen name="toolbar_height">40dp</dimen>
+	<dimen name="toolbar_height">45dp</dimen>
     
 </resources>
