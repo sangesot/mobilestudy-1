@@ -115,6 +115,7 @@ public class CustomListView extends ListView implements OnScrollListener {
 		}
 	}
 
+	// init listview
 	private void init(Context context) {
 		// setCacheColorHint(context.getResources().getColor(R.color.transparent));//hjw : xml do this
 		inflater = LayoutInflater.from(context);
@@ -127,10 +128,9 @@ public class CustomListView extends ListView implements OnScrollListener {
 		measureView(item_listview);
 		headContentHeight = item_listview.getMeasuredHeight();
 		item_listview.setPadding(0, -1 * 1000, 0, 0);// hjw
-		// headView.setPadding(0, -1 * paddingHeight, 0, 0);// hjw
 		item_listview.invalidate();
 		addHeaderView(item_listview, null, false);
-		setOnScrollListener(this);
+		setOnScrollListener(this);// important!
 
 		animation = new RotateAnimation(0, -180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 		animation.setInterpolator(new LinearInterpolator());
@@ -175,9 +175,10 @@ public class CustomListView extends ListView implements OnScrollListener {
 		}
 	}
 
+	// this method is called by the listview and called in UI
 	public void onRefreshComplete() {
 		state = DONE;
-		tv_listview_update.setText("上次更新：" + MLUtil.formatFullDate(new Date()));
+		tv_listview_update.setText("刷新完成：" + MLUtil.formatFullDate(new Date()));
 		changeHeaderViewByState();
 	}
 
@@ -261,11 +262,13 @@ public class CustomListView extends ListView implements OnScrollListener {
 		return super.onTouchEvent(event);
 	}
 
+	// set adapter
 	public void setAdapter(BaseAdapter adapter) {
-		tv_listview_update.setText("上次刷新:" + MLUtil.formatFullDate(new Date()));
+		tv_listview_update.setText("上次刷新：" + MLUtil.formatFullDate(new Date()));
 		super.setAdapter(adapter);
 	}
 
+	// set listener
 	public void setOnRefreshListener(OnRefreshListener refreshListener) {
 		this.refreshListener = refreshListener;
 		isRefreshable = true;

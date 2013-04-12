@@ -1,7 +1,9 @@
 package edu.thu.mobilestudy.activity;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import android.R.bool;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import edu.thu.mobilestudy.http.MLParameter;
 import edu.thu.mobilestudy.model.JSONResult;
+import edu.thu.mobilestudy.model.Resource;
 import edu.thu.mobilestudy.model.ResourceWrapper;
 import edu.thu.mobilestudy.service.DocumentService;
 import edu.thu.mobilestudy.util.CommonUtil;
@@ -195,29 +198,37 @@ public class HomeActivity extends Activity {
 	private RelativeLayout rl_resource_loading;
 	private int currentResourceType = CommonUtil.SUGGESTION_TYPE_NEW;
 
+	private List<Resource> listResourceNew;// resource list
+	private List<Resource> listResourceHot;
+	private ResourceListViewAdapter listViewAdapterNew;// list adapter
+	private ResourceListViewAdapter listViewAdapterHot;
+	private boolean loadedNew = false;// whether the listview has been loaded
+	private boolean loadedHot = false;
+
 	private void initTabResourceUI() {
 		btn_resource_new = (Button) tab_resource.findViewById(R.id.btn_resource_new);
 		btn_resource_hot = (Button) tab_resource.findViewById(R.id.btn_resource_hot);
 		lv_resource_new = (CustomListView) tab_resource.findViewById(R.id.lv_resource_new);
 		lv_resource_hot = (CustomListView) tab_resource.findViewById(R.id.lv_resource_hot);
 		rl_resource_loading = (RelativeLayout) tab_resource.findViewById(R.id.rl_resource_loading);
+		listResourceNew = new ArrayList<Resource>();
+		listResourceHot = new ArrayList<Resource>();
 		btn_resource_new.setSelected(true);
 		btn_resource_new.setOnClickListener(new ResourceOnClickListener(CommonUtil.SUGGESTION_TYPE_NEW));
 		btn_resource_hot.setOnClickListener(new ResourceOnClickListener(CommonUtil.SUGGESTION_TYPE_HOT));
+		// if refresh listener not set,then listview can not be pulled to refresh
 		lv_resource_new.setOnRefreshListener(new OnRefreshListener() {
 			public void onRefresh() {
-				return;
-				// new LoadResourceTask().execute(new Integer[] { CommonUtil.SUGGESTION_TYPE_NEW, CommonUtil.SUGGESTION_DEFAULT_COUNT });
+				loadOrRefreshResources(CommonUtil.SUGGESTION_TYPE_NEW, true);
 			}
 		});
 		lv_resource_hot.setOnRefreshListener(new OnRefreshListener() {
 			public void onRefresh() {
-				return;
-				// new LoadResourceTask().execute(new Integer[] { CommonUtil.SUGGESTION_TYPE_HOT, CommonUtil.SUGGESTION_DEFAULT_COUNT });
+				loadOrRefreshResources(CommonUtil.SUGGESTION_TYPE_HOT, true);
 			}
 		});
 
-		new LoadResourceTask().execute(new Integer[] { CommonUtil.SUGGESTION_TYPE_NEW, CommonUtil.SUGGESTION_DEFAULT_COUNT });
+		loadOrRefreshResources(CommonUtil.SUGGESTION_TYPE_NEW, false);
 	}
 
 	// resource type click listener
@@ -233,20 +244,49 @@ public class HomeActivity extends Activity {
 			if (type == CommonUtil.SUGGESTION_TYPE_NEW) {
 				btn_resource_new.setSelected(true);
 				btn_resource_hot.setSelected(false);
+				if (loadedNew) {
+					hideAllListView();
+					lv_resource_new.setVisibility(View.VISIBLE);
+				} else {
+					loadOrRefreshResources(type, false);
+				}
 			} else {
 				btn_resource_new.setSelected(false);
 				btn_resource_hot.setSelected(true);
+				if (loadedHot) {
+					hideAllListView();
+					lv_resource_hot.setVisibility(View.VISIBLE);
+				} else {
+					loadOrRefreshResources(type, false);
+				}
 			}
-			loadResources(type);
 		}
 	}
 
 	// load resources by type
-	public void loadResources(int type) {
-
+	public void loadOrRefreshResources(int type, boolean flag) {
+		if (type == CommonUtil.SUGGESTION_TYPE_NEW) {
+			if (flag) {
+				new RefreshResourceTask().execute(new Integer[] { CommonUtil.SUGGESTION_TYPE_NEW, CommonUtil.SUGGESTION_DEFAULT_COUNT });
+			} else {
+				new LoadResourceTask().execute(new Integer[] { CommonUtil.SUGGESTION_TYPE_NEW, CommonUtil.SUGGESTION_DEFAULT_COUNT });
+			}
+		} else {
+			if (flag) {
+				new RefreshResourceTask().execute(new Integer[] { CommonUtil.SUGGESTION_TYPE_HOT, CommonUtil.SUGGESTION_DEFAULT_COUNT });
+			} else {
+				new LoadResourceTask().execute(new Integer[] { CommonUtil.SUGGESTION_TYPE_HOT, CommonUtil.SUGGESTION_DEFAULT_COUNT });
+			}
+		}
 	}
 
-	// login task
+	// hide all list view, just show loading page
+	private void hideAllListView() {
+		lv_resource_hot.setVisibility(View.GONE);
+		lv_resource_new.setVisibility(View.GONE);
+	}
+
+	// load resource task
 	class LoadResourceTask extends AsyncTask<Integer[], Void, JSONResult> {
 
 		@Override
@@ -257,15 +297,14 @@ public class HomeActivity extends Activity {
 		@Override
 		protected void onPreExecute() {
 			System.out.println("onPreExecute");
+			hideAllListView();
 			rl_resource_loading.setVisibility(View.VISIBLE);
-			lv_resource_hot.setVisibility(View.GONE);
-			lv_resource_new.setVisibility(View.GONE);
 		}
 
 		@Override
 		protected JSONResult doInBackground(Integer[]... params) {
-			currentResourceType = params[0][0];
 			System.out.println("doInBackground");
+			currentResourceType = params[0][0];
 			MLParameter[] mlParameters = new MLParameter[] { new MLParameter("action", CommonUtil.getValue("action_suggestion")),
 					new MLParameter("repository", CommonUtil.getValue("repository_des")), new MLParameter("suggestionType", params[0][0]),
 					new MLParameter("count", params[0][1]) };
@@ -279,20 +318,78 @@ public class HomeActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(JSONResult jsonResult) {
+			System.out.println("onPostExecute");
 			rl_resource_loading.setVisibility(View.GONE);
+			if (jsonResult.getCode() == CommonUtil.RESULT_CODE_SUCCEED) {
+				try {
+					ResourceWrapper resourceWrapper = ResourceWrapper.constructResourceWrapper(jsonResult.getContent());
+					if (currentResourceType == CommonUtil.SUGGESTION_TYPE_NEW) {
+						lv_resource_new.setVisibility(View.VISIBLE);
+						listResourceNew = resourceWrapper.getResourceList();
+						listViewAdapterNew = new ResourceListViewAdapter(listResourceNew);
+						lv_resource_new.setAdapter(listViewAdapterNew);
+						loadedNew = true;
+					} else {
+						lv_resource_hot.setVisibility(View.VISIBLE);
+						listResourceHot = resourceWrapper.getResourceList();
+						listViewAdapterHot = new ResourceListViewAdapter(listResourceHot);
+						lv_resource_hot.setAdapter(listViewAdapterHot);
+						loadedHot = true;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					ToastUtil.showShortToast(getApplicationContext(), "解析结果出错！");
+				}
+
+			} else {// exception occurs or fail
+				ToastUtil.showShortToast(getApplicationContext(), jsonResult.getMessage());
+			}
+		}
+	}
+
+	// refresh resource task
+	class RefreshResourceTask extends AsyncTask<Integer[], Void, JSONResult> {
+
+		@Override
+		protected void onCancelled() {
+			super.onCancelled();
+		}
+
+		@Override
+		protected void onPreExecute() {
+			System.out.println("onPreExecute");
+		}
+
+		@Override
+		protected JSONResult doInBackground(Integer[]... params) {
+			System.out.println("doInBackground");
+			currentResourceType = params[0][0];
+			MLParameter[] mlParameters = new MLParameter[] { new MLParameter("action", CommonUtil.getValue("action_suggestion")),
+					new MLParameter("repository", CommonUtil.getValue("repository_des")), new MLParameter("suggestionType", params[0][0]),
+					new MLParameter("count", params[0][1]) };
+			return new DocumentService().suggestion(mlParameters);
+		}
+
+		@Override
+		protected void onProgressUpdate(Void... values) {
+			super.onProgressUpdate(values);
+		}
+
+		@Override
+		protected void onPostExecute(JSONResult jsonResult) {
 			System.out.println("onPostExecute");
 			if (jsonResult.getCode() == CommonUtil.RESULT_CODE_SUCCEED) {
 				try {
 					ResourceWrapper resourceWrapper = ResourceWrapper.constructResourceWrapper(jsonResult.getContent());
-
 					if (currentResourceType == CommonUtil.SUGGESTION_TYPE_NEW) {
-						lv_resource_new.setVisibility(View.VISIBLE);
-						lv_resource_new.setAdapter(new ResourceListViewAdapter(resourceWrapper.getResourceList()));
+						listResourceNew = resourceWrapper.getResourceList();
+						listViewAdapterNew.notifyDataSetChanged();
+						lv_resource_new.onRefreshComplete();
 					} else {
-						lv_resource_hot.setVisibility(View.VISIBLE);
-						lv_resource_hot.setAdapter(new ResourceListViewAdapter(resourceWrapper.getResourceList()));
+						listResourceHot = resourceWrapper.getResourceList();
+						listViewAdapterHot.notifyDataSetChanged();
+						lv_resource_hot.onRefreshComplete();
 					}
-
 				} catch (Exception e) {
 					e.printStackTrace();
 					ToastUtil.showShortToast(getApplicationContext(), "解析结果出错！");

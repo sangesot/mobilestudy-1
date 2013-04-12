@@ -4,5 +4,6 @@
     <color name="text_default">#ffffff</color>
     <color name="text_orange">#ff6600</color>
     <color name="text_light">#666</color>
+    <color name="text_toolbar_normal">#6e6e6e</color>
     
 </resources> 

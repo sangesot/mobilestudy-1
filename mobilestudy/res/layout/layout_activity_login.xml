@@ -7,16 +7,16 @@
     <RelativeLayout
         android:id="@+id/rl_login_top"
         android:layout_width="fill_parent"
-        android:layout_height="45dp"
+        android:layout_height="@dimen/titlebar_height"
         android:layout_alignParentTop="true"
-        android:background="@drawable/titlebar_bg" >
+        android:background="@drawable/titlebar_grey" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="登录"
-            android:textColor="@color/text_default"
+            android:textColor="@color/app_default"
             android:textSize="20sp"
             android:textStyle="bold" />
     </RelativeLayout>

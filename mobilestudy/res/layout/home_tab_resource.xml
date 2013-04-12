@@ -8,16 +8,14 @@
     <RelativeLayout
         android:id="@+id/rl_login_top"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/toolbar_height"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/titlebar_bg" >
+        android:layout_height="@dimen/titlebar_height"
+        android:background="@drawable/titlebar_grey" >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_centerInParent="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="4dp" >
+            android:layout_marginTop="8dp" >
 
             <Button
                 android:id="@+id/btn_resource_new"

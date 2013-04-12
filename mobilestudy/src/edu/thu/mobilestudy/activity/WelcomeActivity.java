@@ -20,26 +20,25 @@ import edu.thu.mobilestudy.util.ToastUtil;
  */
 public class WelcomeActivity extends Activity {
 
-//	private ImageView iv_welcome_loading;
+	// private ImageView iv_welcome_loading;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_activity_welcome);
-//		iv_welcome_loading = (ImageView) findViewById(R.id.iv_welcome_loading);
+		// iv_welcome_loading = (ImageView) findViewById(R.id.iv_welcome_loading);
 
 		// for test
-//		AnimationDrawable animationDrawable = (AnimationDrawable) iv_welcome_loading.getBackground();
-//		animationDrawable.start();
-		
+		// AnimationDrawable animationDrawable = (AnimationDrawable) iv_welcome_loading.getBackground();
+		// animationDrawable.start();
+
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
 				new WelcomeTask().execute();
 			}
-		}, 2000);//wait 2 seconds
+		}, 2000);// wait 2 seconds
 
-		 
 	}
 
 	// welcome task
@@ -52,8 +51,8 @@ public class WelcomeActivity extends Activity {
 
 		@Override
 		protected void onPreExecute() {
-//			AnimationDrawable animationDrawable = (AnimationDrawable) iv_welcome_loading.getBackground();
-//			animationDrawable.start();
+			// AnimationDrawable animationDrawable = (AnimationDrawable) iv_welcome_loading.getBackground();
+			// animationDrawable.start();
 			super.onPreExecute();
 		}
 
@@ -91,6 +90,7 @@ public class WelcomeActivity extends Activity {
 				CommonUtil.currentUser = user;
 				ToastUtil.showShortToast(getApplicationContext(), "home");
 				Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
+				// Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
 				startActivity(intent);
 				WelcomeActivity.this.finish();
 			} else {
@@ -103,7 +103,7 @@ public class WelcomeActivity extends Activity {
 
 		// go to Home Cache page
 		private void gotoHomeCache() {
-			//current nothing to do
+			// current nothing to do
 		}
 
 		// app exit
