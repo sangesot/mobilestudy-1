@@ -33,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import edu.thu.mobilestudy.http.MLParameter;
 import edu.thu.mobilestudy.model.JSONResult;
 import edu.thu.mobilestudy.model.Resource;
@@ -55,7 +56,7 @@ public class HomeActivity extends Activity {
 
 	public static HomeActivity instance;
 	public static LayoutInflater layoutInflater;
-	
+
 	private int sound_refresh = R.raw.listview_refresh;
 	public MediaPlayer musicPlayer;
 	private SharedPreferences sharedPreferences;
@@ -638,6 +639,22 @@ public class HomeActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(HomeActivity.this, AboutActivity.class);
 				startActivity(intent);
+			}
+		});
+
+		// follow
+		rl_setting_follow.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				ToastUtil.showShortToast(getApplicationContext(), "暂不支持");
+			}
+		});
+
+		// suggestinon
+		rl_setting_suggestion.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				ToastUtil.showShortToast(getApplicationContext(), "暂不支持");
 			}
 		});
 

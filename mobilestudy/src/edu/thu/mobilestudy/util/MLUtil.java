@@ -9,8 +9,8 @@ import edu.thu.mobilestudy.activity.R;
 
 public class MLUtil {
 
-	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("M-dd");
-	private static SimpleDateFormat fullDateFormat = new SimpleDateFormat("M-dd HH:mm");
+	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("M/dd");
+	private static SimpleDateFormat fullDateFormat = new SimpleDateFormat("yyyy/M/dd");
 
 	// format the date
 	public static String formatFullDate(Date date) {
@@ -32,6 +32,7 @@ public class MLUtil {
 			}
 		}
 		String key = keyword.toLowerCase();
+		System.out.println("key = " + key);
 		if (key.indexOf("java") != 0) {
 			if (isSmall) {
 				return R.drawable.java32;

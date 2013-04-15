@@ -57,7 +57,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerVertical="true"
             android:padding="@dimen/preference_item_padding"
-            android:text="暂不支持"
+            android:text=""
             android:textColor="@color/text_preference_value"
             android:textSize="@dimen/text_preference_item" />
     </RelativeLayout>

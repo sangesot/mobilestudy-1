@@ -56,7 +56,7 @@ public class ListViewResourceAdapter extends BaseAdapter {
 			holder.tv_item_author = (TextView) itemView.findViewById(R.id.tv_item_author);
 			holder.tv_item_catalog = (TextView) itemView.findViewById(R.id.tv_item_catalog);
 			holder.tv_item_date = (TextView) itemView.findViewById(R.id.tv_item_date);
-			holder.tv_item_desc = (TextView) itemView.findViewById(R.id.tv_item_desc);
+//			holder.tv_item_desc = (TextView) itemView.findViewById(R.id.tv_item_desc);
 			itemView.setTag(holder);
 		} else {
 			holder = (ResourceHolder) itemView.getTag();// tag is used to cache the specific view
@@ -70,12 +70,13 @@ public class ListViewResourceAdapter extends BaseAdapter {
 			holder.tv_item_catalog.setText("");
 		}
 		holder.tv_item_name.setText(resource.getName());
-		if (resource.getCatalogName() != null) {
-			holder.tv_item_desc.setText(resource.getDesc());
-		} else {
-			holder.tv_item_desc.setText("");
-		}
-		holder.tv_item_date.setText(MLUtil.formatSimpleDate(parseResourceDate(resource.getFilename())));// TODO
+		//commit not show
+//		if (resource.getDesc() != null) {
+//			holder.tv_item_desc.setText(resource.getDesc());
+//		} else {
+//			holder.tv_item_desc.setText("");
+//		}
+		holder.tv_item_date.setText(MLUtil.formatFullDate(parseResourceDate(resource.getFilename())));// TODO
 
 		holder.iv_item_info.setBackgroundResource(MLUtil.determineResourceType(resource.getKeyword(), false));
 

@@ -14,6 +14,16 @@
         android:padding="1dp"
         android:src="@drawable/resource64" />
 
+    <ImageView
+        android:id="@+id/iv_item_resource"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="6dp"
+        android:background="@drawable/iv_preference_arrowright"
+        android:scaleType="center" />
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -21,31 +31,14 @@
         android:layout_toRightOf="@+id/iv_item_info"
         android:orientation="vertical" >
 
-        <RelativeLayout
-            android:id="@+id/rl_item_info"
-            android:layout_width="fill_parent"
+        <TextView
+            android:id="@+id/tv_item_name"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/tv_item_name"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="resource name resource name resource name resource name resource name"
-                android:singleLine="false"
-                android:textColor="@color/text_orange"
-                android:textSize="@dimen/text_default_size" />
-
-            <TextView
-                android:id="@+id/tv_item_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="resource date"
-                android:textColor="@color/text_orange"
-                android:textSize="@dimen/text_default_size" />
-        </RelativeLayout>
+            android:singleLine="false"
+            android:text="resource name resource name"
+            android:textColor="@color/text_orange"
+            android:textSize="@dimen/text_default_size" />
 
         <LinearLayout
             android:id="@+id/ll_item_info"
@@ -58,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="resource author"
-                android:textColor="@color/text_orange"
+                android:textColor="@color/text_light"
                 android:textSize="@dimen/text_default_size" />
 
             <TextView
@@ -67,10 +60,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="resource catalog"
-                android:textColor="@color/text_orange"
+                android:textColor="@color/text_light"
                 android:textSize="@dimen/text_default_size" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="resource date"
+            android:textColor="@color/text_light"
+            android:textSize="@dimen/text_default_size" />
+
+        <!--
         <TextView
             android:id="@+id/tv_item_desc"
             android:layout_width="200dp"
@@ -78,7 +81,7 @@
             android:singleLine="false"
             android:text="resource desc resource desc resource desc resource desc"
             android:textColor="@color/text_light"
-            android:textSize="@dimen/text_default_size" />
+            android:textSize="@dimen/text_default_size" />-->
     </LinearLayout>
 
 </RelativeLayout>
