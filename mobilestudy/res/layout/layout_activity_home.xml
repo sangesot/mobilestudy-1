@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/toolbar_grey" >
+        android:background="@drawable/titlebar" >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -33,6 +33,7 @@
                     android:clickable="true" />
 
                 <TextView
+                    android:id="@+id/tv_home_resource"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="推荐"
@@ -57,6 +58,7 @@
                     android:clickable="true" />
 
                 <TextView
+                    android:id="@+id/tv_home_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="搜索"
@@ -97,6 +99,7 @@
                     android:clickable="true" />
 
                 <TextView
+                    android:id="@+id/tv_home_download"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="下载"
@@ -121,6 +124,7 @@
                     android:clickable="true" />
 
                 <TextView
+                    android:id="@+id/tv_home_setting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="设置"
@@ -134,6 +138,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="@drawable/iv_toolbar_round"
             android:layout_weight="1"
             android:clickable="true" >
 

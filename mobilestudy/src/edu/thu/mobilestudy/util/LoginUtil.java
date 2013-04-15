@@ -23,6 +23,7 @@ public class LoginUtil {
 
 	// 写出用户信息到文件中
 	public static void writeUserInfo(User user) {
+		System.out.println("write user info");
 		File file;
 		ObjectOutputStream oos;
 		try {
@@ -34,12 +35,13 @@ public class LoginUtil {
 			oos.writeObject(user);
 			oos.close();
 		} catch (Exception e) {
-//			e.printStackTrace();//
+			// e.printStackTrace();//
 		}
 	}
 
 	// 从文件中读取用户信息
 	public static User readUserInfo() {
+		System.out.println("read user info");
 		File file;
 		ObjectInputStream ois;
 		User user = null;
@@ -52,10 +54,24 @@ public class LoginUtil {
 			user = (User) ois.readObject();
 			ois.close();
 		} catch (Exception e) {
-//			e.printStackTrace();
+			// e.printStackTrace();
 			return null;
 		}
 		return user;
+	}
+
+	// delete
+	public static void deleteUserInfo() {
+		System.out.println("delete user info");
+		File file;
+		try {
+			file = new File(CommonUtil.SDFOLDER.getCanonicalPath() + fileName);
+			if (file.exists()) {
+				file.delete();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

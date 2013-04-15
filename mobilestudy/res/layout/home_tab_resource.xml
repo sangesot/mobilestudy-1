@@ -9,7 +9,7 @@
         android:id="@+id/rl_login_top"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/titlebar_height"
-        android:background="@drawable/titlebar_grey" >
+        android:background="@drawable/titlebar" >
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
             android:id="@+id/lv_resource_new"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:divider="#eee"
+            android:divider="@color/app_default"
             android:dividerHeight="1dp"
             android:visibility="gone" />
 
@@ -54,7 +54,7 @@
             android:id="@+id/lv_resource_hot"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:divider="#eee"
+            android:divider="@color/app_default"
             android:dividerHeight="1dp"
             android:visibility="gone" />
 

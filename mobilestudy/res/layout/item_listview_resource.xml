@@ -12,7 +12,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:padding="1dp"
-        android:src="@drawable/logo48" />
+        android:src="@drawable/resource64" />
 
     <LinearLayout
         android:layout_width="fill_parent"

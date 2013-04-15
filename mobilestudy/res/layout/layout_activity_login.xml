@@ -9,14 +9,14 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/titlebar_height"
         android:layout_alignParentTop="true"
-        android:background="@drawable/titlebar_grey" >
+        android:background="@drawable/titlebar" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="登录"
-            android:textColor="@color/app_default"
+            android:textColor="@color/text_titlebar_normal"
             android:textSize="20sp"
             android:textStyle="bold" />
     </RelativeLayout>

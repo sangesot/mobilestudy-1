@@ -1,14 +1,132 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/app_default" >
+    android:background="@color/app_default"
+    android:orientation="vertical" >
 
     <RelativeLayout
-        android:id="@+id/rl_login_top"
+        android:id="@+id/rl_search_searchbar"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/toolbar_height"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/titlebar_grey" >
+        android:layout_height="wrap_content"
+        android:background="@drawable/searchbar" >
+
+        <FrameLayout
+            android:id="@+id/fl_search_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/slidebtn_resource" >
+
+            <!--
+            <TextView 
+                android:id="@+id/tv_search_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/slidebtn_orange"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="资源"
+                android:textSize="@dimen/text_searchbar_size"
+                android:textColor="@color/text_default"
+                />
+            -->
+
+            <ImageView
+                android:id="@+id/iv_search_slideround"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="@drawable/slidebtn_round" />
+        </FrameLayout>
+        
+        <EditText
+            android:id="@+id/et_search_key"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_toRightOf="@+id/fl_search_type"
+            android:layout_toLeftOf="@+id/iv_search_searchicon"
+            android:layout_margin="10dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/eb_login_form"
+            android:hint="关键字"
+            android:singleLine="true"
+            android:textColor="#666"
+            android:textSize="@dimen/text_searchbar_size" />
+
+        <ImageView
+            android:id="@+id/iv_search_searchicon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:clickable="true"
+            android:background="@drawable/iv_searchicon" />
+    </RelativeLayout>
+    
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+
+        <edu.thu.mobilestudy.view.CustomListView
+            android:id="@+id/lv_search_resource"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="@color/app_default"
+            android:dividerHeight="1dp"
+            android:visibility="gone" />
+        
+        <edu.thu.mobilestudy.view.CustomListView
+            android:id="@+id/lv_search_course"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="@color/app_default"
+            android:dividerHeight="1dp"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/rl_search_loading"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_gravity="center"
+            android:background="@drawable/loading_bg"
+            android:visibility="gone" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="正在搜索资源..."
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
+    
+    
+
+</LinearLayout><!--
+    <RelativeLayout
+        android:id="@+id/rl_search_top"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/titlebar_height"
+        android:background="@drawable/titlebar" >
 
         <Button
             android:id="@+id/btn_comment_back"
@@ -19,15 +137,15 @@
             android:layout_marginLeft="5dp"
             android:background="@drawable/btn_title_back"
             android:text="返回"
-            android:textColor="@color/app_default"
+            android:textColor="@color/text_default"
             android:textSize="@dimen/text_titlebar_size" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="资源"
-            android:textColor="@color/app_default"
+            android:text="搜索"
+            android:textColor="@color/text_default"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -40,57 +158,7 @@
             android:layout_marginRight="5dp"
             android:background="@drawable/btn_title_function"
             android:text="发表"
-            android:textColor="@color/app_default"
+            android:textColor="@color/text_default"
             android:textSize="@dimen/text_titlebar_size" />
     </RelativeLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Search" />
-
-    <!-- not use -->
-    <!--
-        <Button
-            android:id="@+id/btn_comment_back"
-            android:layout_width="@dimen/btn_titlebar_size"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/btn_title_back"
-            android:text="返回"
-            android:textColor="@color/text_default"
-            android:textSize="@dimen/text_titlebar_size" />
-    -->
-
-
-    <!--
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="资源"
-            android:textColor="@color/text_default"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-    -->
-
-
-    <!-- not use -->
-    <!--
-             <Button
-            android:id="@+id/btn_comment_send"
-            android:layout_width="@dimen/btn_titlebar_size"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/btn_title_function"
-            android:text="发表"
-            android:textColor="@color/text_default"
-            android:textSize="@dimen/text_titlebar_size" />
-    -->
-
-</RelativeLayout>
+-->

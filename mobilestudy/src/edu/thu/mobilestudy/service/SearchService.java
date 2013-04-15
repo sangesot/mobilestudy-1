@@ -14,14 +14,14 @@ import edu.thu.mobilestudy.util.CommonUtil;
  */
 public class SearchService extends MobileLearning {
 
+	// same as suggestion
 	public JSONResult search(MLParameter[] mlParameters) {
 		try {
-			return new JSONResult(httpClient.httpGet(CommonUtil.getValue("baseUrl") + CommonUtil.getValue("service_search"), mlParameters)
-					.asJSONObject());
+			return new JSONResult(httpClient
+					.httpGet(CommonUtil.getValue("baseUrl") + CommonUtil.getValue("service_search"), mlParameters).asJSONObject());
 		} catch (MLException e) {
 			e.printStackTrace();
+			return new JSONResult(CommonUtil.RESULT_CODE_EXCEPTION, e.getMessage(), null);
 		}
-		return null;
 	}
-
 }

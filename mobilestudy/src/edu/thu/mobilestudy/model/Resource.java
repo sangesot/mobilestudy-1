@@ -1,11 +1,10 @@
 package edu.thu.mobilestudy.model;
 
-import java.io.Serializable;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import edu.thu.mobilestudy.util.CommonUtil;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * ×ÊÔ´Àà
@@ -13,9 +12,9 @@ import edu.thu.mobilestudy.util.CommonUtil;
  * @author hujiawei
  * 
  */
-public class Resource implements Serializable {
+public class Resource implements /* Serializable, */Parcelable {
 
-	private static final long serialVersionUID = 3706071648466093655L;
+	// private static final long serialVersionUID = 3706071648466093655L;
 	private long id;//
 	private long catalogId;// catalog id may be null
 	private String catalogName;// catalog name may be null
@@ -28,6 +27,22 @@ public class Resource implements Serializable {
 	private String fileext;
 	private String lompath;// may be null
 	private int status;
+
+	public Resource(long id, long catalogId, String catalogName, String name, String desc, String keyword, String author, String userId,
+			String filename, String fileext, String lompath, int status) {
+		this.id = id;
+		this.catalogId = catalogId;
+		this.catalogName = catalogName;
+		this.name = name;
+		this.desc = desc;
+		this.keyword = keyword;
+		this.author = author;
+		this.userId = userId;
+		this.filename = filename;
+		this.fileext = fileext;
+		this.lompath = lompath;
+		this.status = status;
+	}
 
 	public Resource(String jsonsString) throws JSONException, MLException {
 		this(new JSONObject(jsonsString));
@@ -68,6 +83,43 @@ public class Resource implements Serializable {
 			}
 		}
 	}
+
+	// following three method used for passing Resource between activities
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+	
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {// write
+		dest.writeLong(id);
+		dest.writeLong(catalogId);
+		dest.writeString(catalogName);
+		dest.writeString(name);
+		dest.writeString(desc);
+		dest.writeString(keyword);
+		dest.writeString(author);
+		dest.writeString(userId);
+		dest.writeString(filename);
+		dest.writeString(fileext);
+		dest.writeString(lompath);
+		dest.writeInt(status);
+	}
+	
+	public static final Parcelable.Creator<Resource> CREATOR = new Parcelable.Creator<Resource>() {// create
+		@Override
+		public Resource createFromParcel(Parcel source) {
+			return new Resource(source.readLong(), source.readLong(), source.readString(), source.readString(), source.readString(),
+					source.readString(), source.readString(), source.readString(), source.readString(), source.readString(),
+					source.readString(), source.readInt());
+		}
+	
+		@Override
+		public Resource[] newArray(int size) {
+			return null;
+		}
+	
+	};
 
 	@Override
 	public String toString() {

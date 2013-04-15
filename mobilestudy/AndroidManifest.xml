@@ -20,7 +20,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".WelcomeActivity"
-            android:theme="@style/Anim_style2" >
+            android:theme="@style/AnimFadeStyle" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,11 +29,23 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:theme="@android:style/Theme.NoTitleBar" >
+            android:theme="@style/AnimFadeStyle" >
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:theme="@style/Anim_style2" >
+            android:theme="@style/AnimFadeStyle" >
+        </activity>
+        <activity
+            android:name=".ResourceActivity"
+            android:theme="@style/AnimFadeStyle" >
+        </activity>
+        <activity
+            android:name=".AboutActivity"
+            android:theme="@style/AnimFadeStyle" >
+        </activity>
+        <activity
+            android:name=".DialogSettingsExitActivity"
+            android:theme="@style/CustomDialogStyle" >
         </activity>
     </application>
 

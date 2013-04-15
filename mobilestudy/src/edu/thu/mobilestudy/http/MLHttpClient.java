@@ -98,7 +98,7 @@ public class MLHttpClient implements java.io.Serializable {
 			}
 			try {
 				buffer.append(URLEncoder.encode(mlParameters[j].name, "UTF-8")).append("=")
-						.append(URLEncoder.encode(mlParameters[j].value, "UTF-8"));
+						.append(URLEncoder.encode(String.valueOf(mlParameters[j].value), "UTF-8"));
 			} catch (java.io.UnsupportedEncodingException neverHappen) {
 			}
 		}

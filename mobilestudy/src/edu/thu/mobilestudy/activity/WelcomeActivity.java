@@ -87,10 +87,10 @@ public class WelcomeActivity extends Activity {
 			}
 
 			if (user != null && user.getLoginMode() == LoginUtil.AUTO_LOGIN) {
+				System.out.println(user.getUserName());
 				CommonUtil.currentUser = user;
 				ToastUtil.showShortToast(getApplicationContext(), "home");
 				Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
-				// Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
 				startActivity(intent);
 				WelcomeActivity.this.finish();
 			} else {

@@ -1,0 +1,240 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/app_default"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/rl_resource_top"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/titlebar_height"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/titlebar" >
+
+        <Button
+            android:id="@+id/btn_resource_back"
+            android:layout_width="@dimen/btn_titlebar_size"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/btn_title_back"
+            android:text="返回"
+            android:textColor="@color/text_default"
+            android:textSize="@dimen/text_titlebar_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="资源详情"
+            android:textColor="@color/text_default"
+            android:textSize="@dimen/text_titlebar_center"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_resource_info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_resource_top" >
+
+        <ScrollView
+            android:id="@+id/sv_resource_info"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollbarStyle="outsideOverlay" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="88dp"
+                    android:layout_gravity="top"
+                    android:background="@drawable/resource_info_background"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:tileMode="repeat" >
+
+                    <ImageView
+                        android:id="@+id/iv_resource_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="43dp"
+                        android:src="@drawable/resource64" />
+
+                    <TextView
+                        android:id="@+id/tv_resource_name"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/iv_resource_image"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/iv_resource_image"
+                        android:singleLine="false"
+                        android:text="resource name resource name resource name resource name"
+                        android:textColor="@color/text_preference_value"
+                        android:textSize="@dimen/text_preference_item" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/preference_first_item"
+                    android:clickable="true"
+                    android:gravity="center_vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_resource_author_key"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:padding="@dimen/preference_item_padding"
+                        android:text="上传者"
+                        android:textColor="@color/text_preference_key"
+                        android:textSize="@dimen/text_preference_item" />
+
+                    <TextView
+                        android:id="@+id/tv_resource_author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/tv_resource_author_key"
+                        android:padding="@dimen/preference_item_padding"
+                        android:text="author name"
+                        android:textColor="@color/text_preference_value"
+                        android:textSize="@dimen/text_preference_item" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/preference_item"
+                    android:clickable="true"
+                    android:gravity="center_vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_resource_catalog_key"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:padding="@dimen/preference_item_padding"
+                        android:text="资源类别"
+                        android:textColor="@color/text_preference_key"
+                        android:textSize="@dimen/text_preference_item" />
+
+                    <TextView
+                        android:id="@+id/tv_resource_catalog"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/tv_resource_catalog_key"
+                        android:padding="@dimen/preference_item_padding"
+                        android:text="resource catalog"
+                        android:textColor="@color/text_preference_value"
+                        android:textSize="@dimen/text_preference_item" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/preference_item"
+                    android:clickable="true"
+                    android:gravity="center_vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_resource_fileext_key"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:padding="@dimen/preference_item_padding"
+                        android:text="文件类型"
+                        android:textColor="@color/text_preference_key"
+                        android:textSize="@dimen/text_preference_item" />
+
+                    <TextView
+                        android:id="@+id/tv_resource_fileext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/tv_resource_fileext_key"
+                        android:padding="@dimen/preference_item_padding"
+                        android:singleLine="false"
+                        android:text="resource file ext"
+                        android:textColor="@color/text_preference_value"
+                        android:textSize="@dimen/text_preference_item" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/preference_last_item"
+                    android:clickable="true"
+                    android:gravity="center_vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_resource_desc_key"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:padding="@dimen/preference_item_padding"
+                        android:text="资源简介"
+                        android:textColor="@color/text_preference_key"
+                        android:textSize="@dimen/text_preference_item" />
+
+                    <TextView
+                        android:id="@+id/tv_resource_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/tv_resource_desc_key"
+                        android:padding="@dimen/preference_item_padding"
+                        android:text="resource desc resource desc resource desc"
+                        android:textColor="@color/text_preference_value"
+                        android:textSize="@dimen/text_preference_item" />
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_resource_function"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/fl_resource_info"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btn_resource_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/btn_style_blue"
+            android:paddingBottom="8dp"
+            android:paddingLeft="130dp"
+            android:paddingRight="130dp"
+            android:paddingTop="8dp"
+            android:text="收藏"
+            android:textColor="@color/text_default"
+            android:textSize="@dimen/btn_big_textsize" />
+
+        <Button
+            android:id="@+id/btn_resource_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/btn_style_green"
+            android:paddingLeft="130dp"
+            android:paddingRight="130dp"
+            android:text="下载"
+            android:textColor="@color/text_default"
+            android:textSize="@dimen/btn_big_textsize" />
+    </LinearLayout>
+
+</RelativeLayout>
